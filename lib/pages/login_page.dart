@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  bool passwordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +43,19 @@ class LoginPage extends StatelessWidget {
                         hintText: "Enter Username", labelText: "Usermane"),
                   ),
                   TextFormField(
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                        hintText: "Enter Password", labelText: "Password"),
+                    obscureText: passwordVisible,
+                    decoration: InputDecoration(
+                        hintText: "Enter Password",
+                        labelText: "Password",
+                        suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                passwordVisible = !passwordVisible;
+                              });
+                            },
+                            icon: Icon(passwordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off))),
                   ),
                   const SizedBox(
                     height: 20.0,
